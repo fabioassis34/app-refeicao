@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:refeicao/screens/categories_meals_screen.dart';
 import 'package:refeicao/screens/categories_screen.dart';
+import 'package:refeicao/utils/app_routes.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,7 +24,10 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan)
               .copyWith(secondary: Colors.grey),
           canvasColor: const Color.fromRGBO(255, 254, 229, 1)),
-      home: const CategoriesScreen(),
+      routes: {
+        AppRoutes.home: (ctx) => const CategoriesScreen(),
+        AppRoutes.categoriesMeals: (ctx) => const CategoriesMealsScreen()
+      },
     );
   }
 }
