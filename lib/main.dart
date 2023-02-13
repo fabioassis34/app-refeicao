@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:refeicao/screens/categories_meals_screen.dart';
 import 'package:refeicao/screens/meal_datail_screen.dart';
+import 'package:refeicao/screens/settings_screen.dart';
 import 'package:refeicao/screens/tabs_screen.dart';
 import 'package:refeicao/utils/app_routes.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.home: (ctx) => const TabsScreen(),
         AppRoutes.categoriesMeals: (ctx) => const CategoriesMealsScreen(),
         AppRoutes.mealDetail: (ctx) => const MealDetailScreen(),
+        AppRoutes.settingsScreen: (ctx) => const SettingsScreen(),
       },
     );
   }

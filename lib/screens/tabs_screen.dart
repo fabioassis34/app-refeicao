@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:refeicao/components/main_drawer.dart';
 import 'package:refeicao/screens/categories_screen.dart';
 import 'package:refeicao/screens/favorite_screen.dart';
 
@@ -37,6 +38,7 @@ class _TabsScreenState extends State<TabsScreen> {
         title: Text(_screens[_selectedScreenIndex]['title'] as String),
       ),
       body: _screens[_selectedScreenIndex]['screen'] as Widget,
+      drawer: MainDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 5,
         unselectedItemColor: Colors.white,
