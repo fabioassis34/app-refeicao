@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:refeicao/components/meal_icon.dart';
+import 'package:refeicao/utils/app_routes.dart';
 
 import '../models/meal.dart';
 
@@ -6,12 +8,14 @@ class MealItem extends StatelessWidget {
   final Meal meal;
   const MealItem({Key? key, required this.meal}) : super(key: key);
 
-  void _selecetMeal() {}
+  _selecetMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(AppRoutes.mealDetail, arguments: meal);
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: _selecetMeal,
+      onTap: () => _selecetMeal(context),
       borderRadius: BorderRadius.circular(15),
       child: Card(
         elevation: 5,
@@ -59,36 +63,15 @@ class MealItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20),
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.access_time),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                        Text('${meal.duration} min')
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const Icon(Icons.work_outline),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                        Text(meal.complexityText)
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const Icon(Icons.attach_money_rounded),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                        Text(meal.costText)
-                      ],
-                    ),
-                  ]),
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  MealIcon(
+                      text: '${meal.duration} min', icon: Icons.access_time),
+                  MealIcon(text: meal.complexityText, icon: Icons.work_outline),
+                  MealIcon(
+                      text: meal.costText, icon: Icons.attach_money_rounded),
+                ],
+              ),
             ),
           ],
         ),
