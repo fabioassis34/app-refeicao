@@ -5,8 +5,13 @@ import 'package:refeicao/components/main_drawer.dart';
 import 'package:refeicao/models/settings.dart';
 
 class SettingsScreen extends StatefulWidget {
+  final Function(Settings) onSettingsChanged;
+  final Settings settings;
+
   const SettingsScreen({
     Key? key,
+    required this.onSettingsChanged,
+    required this.settings,
   }) : super(key: key);
 
   @override
@@ -15,16 +20,28 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   Widget _createSwitch(
-      String title, String subtitle, bool value, Function(bool) onChanged) {
+    String title,
+    String subtitle,
+    bool value,
+    Function(bool) onChanged,
+  ) {
     return SwitchListTile.adaptive(
       title: Text(title),
       subtitle: Text(subtitle),
       value: value,
-      onChanged: onChanged,
+      onChanged: (value) {
+        onChanged(value);
+        widget.onSettingsChanged(settings);
+      },
     );
   }
 
-  var settings = Settings();
+  late Settings settings;
+  @override
+  void initState() {
+    super.initState();
+    settings = widget.settings;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +51,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         drawer: MainDrawer(),
         body: Column(
-          
           children: [
             Text(
               'Configurações',

@@ -1,12 +1,15 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
 import 'package:refeicao/components/main_drawer.dart';
 import 'package:refeicao/screens/categories_screen.dart';
 import 'package:refeicao/screens/favorite_screen.dart';
 
+import '../models/meal.dart';
+
 class TabsScreen extends StatefulWidget {
-  const TabsScreen({Key? key}) : super(key: key);
+  final List<Meal> favoriteMeals;
+  TabsScreen(this.favoriteMeals);
 
   @override
   State<TabsScreen> createState() => _TabsScreenState();
@@ -14,16 +17,22 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   int _selectedScreenIndex = 0;
-  final List<Map<String, Object>> _screens = [
-    {
-      'title': 'Lista de categorias',
-      'screen': CategoriesScreen(),
-    },
-    {
-      'title': 'Meus favoritos',
-      'screen': FavoriteScreen(),
-    },
-  ];
+  late List<Map<String, Object>> _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    _screens = [
+      {
+        'title': 'Lista de categorias',
+        'screen': CategoriesScreen(),
+      },
+      {
+        'title': 'Meus favoritos',
+        'screen': FavoriteScreen(widget.favoriteMeals),
+      },
+    ];
+  }
 
   _selectScreen(int index) {
     setState(() {
